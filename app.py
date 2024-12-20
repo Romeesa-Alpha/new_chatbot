@@ -251,7 +251,7 @@ def main():
     # Chat input
     if prompt := st.chat_input("Ask a question about Uskt"):
         st.session_state.messages.append({"role": "user", "content": prompt})
-        st.session_state.conversation_log.append({"\n\n role": "user", "content": prompt})
+        st.session_state.conversation_log.append({"role": "\n\n user", "content": prompt})
         
         # with st.chat_message("user"):
         #     st.markdown(prompt)
