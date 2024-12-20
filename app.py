@@ -227,9 +227,10 @@ def main():
             st.session_state.chunks = get_or_create_chunks(pdf_file)
             st.session_state.vectorizer = get_vectorizer(st.session_state.chunks)
         if st.session_state.chunks and st.session_state.vectorizer:
-            sucess=st.success("PDF processed successfully!")
-            time.sleep(3) # Wait for 3 seconds
-            sucess.empty()
+            print("PDF processed successfully!")
+            # sucess=st.success("PDF processed successfully!")
+            # time.sleep(3) # Wait for 3 seconds
+            # sucess.empty()
         else:
             st.error("Failed to process PDF. Please try again.")
             
@@ -273,7 +274,7 @@ def main():
         render_message(full_response, "assistant")
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
-        st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
+        st.session_state.conversation_log.append({"role": "assistant", "content": full_response. "\n\n"})
 
 
     if len(st.session_state.conversation_log) >= 6:  # Example threshold
