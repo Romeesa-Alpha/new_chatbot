@@ -161,7 +161,7 @@ def get_ai_response(messages, context, model):
         chat_completion = client.chat.completions.create(
             messages=all_messages,
             model=model,
-            max_tokens=2048,
+            max_tokens=1024,
             temperature=0.7
         )
         return chat_completion.choices[0].message.content
