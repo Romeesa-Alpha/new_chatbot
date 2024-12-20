@@ -251,7 +251,7 @@ def main():
     # Chat input
     if prompt := st.chat_input("Ask a question about Uskt"):
         st.session_state.messages.append({"role": "user", "content": prompt})
-        st.session_state.conversation_log.append({"role": "user", "content": prompt})
+        st.session_state.conversation_log.append({"\n\n role": "user", "content": prompt})
         
         # with st.chat_message("user"):
         #     st.markdown(prompt)
@@ -274,7 +274,7 @@ def main():
         render_message(full_response, "assistant")
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
-        st.session_state.conversation_log.append({"role": "assistant", "content": full_response. "\n\n"})
+        st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
 
 
     if len(st.session_state.conversation_log) >= 6:  # Example threshold
