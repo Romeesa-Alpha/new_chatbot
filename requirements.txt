@@ -1,0 +1,15 @@
+streamlit
+twilio
+python-dotenv
+groq
+mysql-connector-python
+bcrypt
+PyPDF2
+scikit-learn
+apscheduler
+flasks
+requests
+flask_cors
+flask-sqlalchemy
+flask-wtf
+flask_bootstrap
