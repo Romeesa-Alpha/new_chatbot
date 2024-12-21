@@ -31,7 +31,7 @@ st.markdown(
     """
     <style>
     body {
-        background-image: url('https://img.pikbest.com/origin/09/24/42/pIkbEsT8apIkbEsT9Mn.jpg!w700wp');
+        background-image: url('./workspaces/Uskt-Chatbot/chatbot-bg.JPG');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
