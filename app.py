@@ -308,7 +308,7 @@ def main():
         # st.session_state.messages.append({"role": "assistant", "content": full_response})
         render_message(prompt, "user")
 
-        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=5) if st.session_state.chunks else []
+        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=1) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
         prompt_limit = f"{st.session_state.messages} {context}"
