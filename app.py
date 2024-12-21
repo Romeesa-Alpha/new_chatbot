@@ -26,6 +26,21 @@ Auth_Token = os.getenv("Auth_Token")
 Twilio_Number= os.getenv("Twilio_Number")
 Recipient_Number = os.getenv("Recipient_Number")
 
+
+st.markdown(
+    """
+    <style>
+    body {
+        background-image: url('https://img.pikbest.com/origin/09/24/42/pIkbEsT8apIkbEsT9Mn.jpg!w700wp');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 ############################## whatsapp message send using TWilio ######################333
 def send_to_whatsapp(conversation_log):
     try:
@@ -244,7 +259,7 @@ def render_message(message, role):
                         background-color: {bg_color}; color: {text_color}; 
                         padding: 10px; border-radius: 10px;'>
                 <span>{message}</span>
-                <span style='margin-right: 10px;'>{icon}</span>  <!-- Icon -->
+                <span style='margin-left: 10px;'>{icon}</span>  <!-- Icon -->
             </div>
         </div>
         """,
