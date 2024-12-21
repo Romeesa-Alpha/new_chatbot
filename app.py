@@ -180,7 +180,7 @@ def get_vectorizer(chunks):
         st.error("Failed to create text vectorizer. Please try again.")
         return None
 
-def find_most_relevant_chunks(query, chunks, vectorizer, top_k=2):
+def find_most_relevant_chunks(query, chunks, vectorizer, top_k=3):
     try:
         chunk_vectors = vectorizer.transform(chunks)
         query_vector = vectorizer.transform([query])
@@ -233,7 +233,7 @@ def render_message(message, role):
             <div style='display: flex; align-items: center; max-width: 70%; 
                         background-color: {bg_color}; color: {text_color}; 
                         padding: 10px; border-radius: 10px;'>
-                <span style='margin-right: 10px; background:blue; padding:5px border-radius:6px;'>{icon}</span>  <!-- Icon -->
+                <span style='margin-right: 10px; background:blue; width:10px; height:10px; padding:5px border-radius:6px;'>{icon}</span>  <!-- Icon -->
                 <span>{message}</span>
             </div>
         </div>
@@ -325,8 +325,8 @@ def main():
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
         
         ################# Context lenght checking ##########################33
-        context = ""
-        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+        # context = ""
+        # render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
         
     
 
