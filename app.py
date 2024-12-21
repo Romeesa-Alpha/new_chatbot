@@ -219,6 +219,18 @@ def render_message(message, role):
         bg_color = "#f0f0f0"  # Light gray for bot
         text_color = "#000000"  # Black text
         icon = "🤖"  # Chatbot icon (or use an image URL)
+        st.markdown(
+        f"""
+        <div style='display: flex; justify-content: {alignment}; margin-bottom: 10px;'>
+            <div style='display: flex; align-items: center; max-width: 70%; 
+                        background-color: {bg_color}; color: {text_color}; 
+                        padding: 10px; border-radius: 10px;'>
+                <span style='margin-right: 10px;'>{icon}</span>  <!-- Icon -->
+                <span>{message}</span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True)
     else:
         # Right-aligned messages (user)
         icon = "👤"  # User icon (or use an image URL)
@@ -227,18 +239,7 @@ def render_message(message, role):
         text_color = "#ffffff"  # White text
 
     # HTML for message rendering
-    st.markdown(
-        f"""
-        <div style='display: flex; justify-content: {alignment}; margin-bottom: 10px;'>
-            <div style='display: flex; align-items: center; max-width: 70%; 
-                        background-color: {bg_color}; color: {text_color}; 
-                        padding: 10px; border-radius: 10px;'>
-                <span style='margin-right: 10px; background:blue; width:10px; height:10px; padding:5px border-radius:6px;'>{icon}</span>  <!-- Icon -->
-                <span>{message}</span>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True)
+  
 
 def main():
     st.title("Chat With Uskt Chatbot")
