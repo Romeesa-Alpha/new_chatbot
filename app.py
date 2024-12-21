@@ -237,6 +237,18 @@ def render_message(message, role):
         alignment = "right"
         bg_color = "#0078D4"  # Blue for user
         text_color = "#ffffff"  # White text
+        st.markdown(
+        f"""
+        <div style='display: flex; justify-content: {alignment}; margin-bottom: 10px;'>
+            <div style='display: flex; align-items: center; max-width: 70%; 
+                        background-color: {bg_color}; color: {text_color}; 
+                        padding: 10px; border-radius: 10px;'>
+                <span>{message}</span>
+                <span style='margin-right: 10px;'>{icon}</span>  <!-- Icon -->
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True)
 
     # HTML for message rendering
   
