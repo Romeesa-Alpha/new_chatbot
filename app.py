@@ -257,20 +257,7 @@ def render_message(message, role):
   
 
 def main():
-    image_path = Path("chatbot-bg.JPG").resolve()
-    st.markdown(
-    """
-    <style>
-    body {
-        background-image: url("data:image/jpg;base64,{image_path.read_bytes().hex()}");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+
     st.title("Chat With Uskt Chatbot")
      # Add a button to clear the conversation
     if st.button("Reset Conversation"):
