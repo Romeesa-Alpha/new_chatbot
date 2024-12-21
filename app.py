@@ -320,8 +320,9 @@ def main():
         st.session_state.messages.append({"role": "assistant", "content": full_response})
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
         
-        context = ""
-        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+        ################# Context lenght checking ##########################33
+        # context = ""
+        # render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
     if len(st.session_state.conversation_log) >= 6:  # Example threshold
         # Send the log to WhatsApp
@@ -334,7 +335,7 @@ def main():
     # Add a button to clear the conversation
     if st.button("Reset Conversation"):
        st.session_state.messages = []
-       st.experimental_rerun()
+       st.rerun()
 
 if __name__ == "__main__":
     main()
