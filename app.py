@@ -289,45 +289,46 @@ def main():
         render_message(message["content"], message["role"])
 
 
-    with st.container():
-        # Chat input
-        if prompt := st.chat_input("Ask a question about Uskt"):
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            st.session_state.conversation_log.append({"role": "\n\n user", "content": prompt})
-            
-            # with st.chat_message("user"):
-            #     st.markdown(prompt)
+    
+    # Chat input
+    if prompt := st.chat_input("Ask a question about Uskt"):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        st.session_state.conversation_log.append({"role": "\n\n user", "content": prompt})
+        
+        # with st.chat_message("user"):
+        #     st.markdown(prompt)
 
-            # with st.chat_message("assistant"):
-            #     message_placeholder = st.empty()
-            #     relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
-            #     context = "\n\n".join(relevant_chunks)
+        # with st.chat_message("assistant"):
+        #     message_placeholder = st.empty()
+        #     relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
+        #     context = "\n\n".join(relevant_chunks)
 
-            #     full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
-            #     message_placeholder.markdown(full_response)
+        #     full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
+        #     message_placeholder.markdown(full_response)
 
-            # st.session_state.messages.append({"role": "assistant", "content": full_response})
-            render_message(prompt, "user")
+        # st.session_state.messages.append({"role": "assistant", "content": full_response})
+        render_message(prompt, "user")
 
-            relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
-            context = "\n\n".join(relevant_chunks)
+        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
+        context = "\n\n".join(relevant_chunks)
 
-            prompt_limit = f"{st.session_state.messages} {context}"
-            render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+        prompt_limit = f"{st.session_state.messages} {context}"
+        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
-            full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
-            render_message(full_response, "assistant")
+        full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
+        render_message(full_response, "assistant")
 
-            st.session_state.messages.append({"role": "assistant", "content": full_response})
-            st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
-            
-            ################# Context lenght checking ##########################33
-            context = ""
-            render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
-        # Add a button to clear the conversation
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
+        st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
+        
+        ################# Context lenght checking ##########################33
+        context = ""
+        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+         # Add a button to clear the conversation
         if st.button("Reset Conversation"):
             st.session_state.messages = []
             st.rerun()
+    
 
     if len(st.session_state.conversation_log) >= 6:  # Example threshold
         # Send the log to WhatsApp
