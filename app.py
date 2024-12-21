@@ -308,18 +308,20 @@ def main():
         # st.session_state.messages.append({"role": "assistant", "content": full_response})
         render_message(prompt, "user")
 
-        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=1) if st.session_state.chunks else []
+        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
         prompt_limit = f"{st.session_state.messages} {context}"
-        render_message(f"{len(prompt_limit)}  {len(st.session_state.messages)} {len(context)}", "assistant")
+        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
         render_message(full_response, "assistant")
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
-
+        
+        context = ""
+        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
     if len(st.session_state.conversation_log) >= 6:  # Example threshold
         # Send the log to WhatsApp
