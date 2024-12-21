@@ -208,7 +208,7 @@ def get_ai_response(messages, context, model):
         return chat_completion.choices[0].message.content
     except Exception as e:
         logger.error(f"Error generating AI response: {e}")
-        return "I'm sorry, but I encountered an error while processing your request. Please try again."
+        return "I'm sorry, Chat session compelete please reset chat by clicking on reset button"
 
 
 def render_message(message, role):
@@ -233,7 +233,7 @@ def render_message(message, role):
             <div style='display: flex; align-items: center; max-width: 70%; 
                         background-color: {bg_color}; color: {text_color}; 
                         padding: 10px; border-radius: 10px;'>
-                <span style='margin-right: 10px;'>{icon}</span>  <!-- Icon -->
+                <span style='margin-right: 10px; background:blue; padding:5px border-radius:6px;'>{icon}</span>  <!-- Icon -->
                 <span>{message}</span>
             </div>
         </div>
@@ -308,9 +308,11 @@ def main():
         # st.session_state.messages.append({"role": "assistant", "content": full_response})
         render_message(prompt, "user")
 
-        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
+        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=2) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
+        prompt_limit = st.session_state.messages.context
+        render_message(len(prompt_limit), "assistant")
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
         render_message(full_response, "assistant")
 
@@ -327,9 +329,9 @@ def main():
 
 
     # Add a button to clear the conversation
-   # if st.button("Clear Conversation"):
-    #    st.session_state.messages = []
-     #   st.experimental_rerun()
+    if st.button("Reset Conversation"):
+       st.session_state.messages = []
+       st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
