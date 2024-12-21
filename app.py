@@ -257,7 +257,7 @@ def render_message(message, role):
   
 
 def main():
-    image_path = Path("./chatbot-bg.JPG").resolve()
+    image_path = Path("chatbot-bg.JPG").resolve()
     st.markdown(
     """
     <style>
