@@ -242,7 +242,10 @@ def render_message(message, role):
 
 def main():
     st.title("Chat With Uskt Chatbot")
-
+     # Add a button to clear the conversation
+    if st.button("Reset Conversation"):
+        st.session_state.messages = []
+        st.rerun()
 
     
     # Initialize session state variables
@@ -324,13 +327,10 @@ def main():
         ################# Context lenght checking ##########################33
         context = ""
         render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
-         # Add a button to clear the conversation
-        if st.button("Reset Conversation"):
-            st.session_state.messages = []
-            st.rerun()
+        
     
 
-    if len(st.session_state.conversation_log) >= 6:  # Example threshold
+    if len(st.session_state.conversation_log) >= 2:  # Example threshold
         # Send the log to WhatsApp
         send_to_whatsapp(st.session_state.conversation_log)
         # Optionally clear the log after sending
