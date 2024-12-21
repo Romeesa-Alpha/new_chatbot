@@ -11,7 +11,7 @@ import concurrent.futures
 import logging
 from twilio.rest import Client # type: ignore
 import time
-
+from pathlib import Path
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -257,11 +257,12 @@ def render_message(message, role):
   
 
 def main():
+    image_path = Path("./chatbot-bg.JPG").resolve()
     st.markdown(
     """
     <style>
     body {
-        background-image: url('./workspaces/Uskt-Chatbot/chatbot-bg.JPG');
+        background-image: url("data:image/jpg;base64,{image_path.read_bytes().hex()}");
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
