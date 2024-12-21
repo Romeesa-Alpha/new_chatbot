@@ -27,19 +27,7 @@ Twilio_Number= os.getenv("Twilio_Number")
 Recipient_Number = os.getenv("Recipient_Number")
 
 
-st.markdown(
-    """
-    <style>
-    body {
-        background-image: url('./workspaces/Uskt-Chatbot/chatbot-bg.JPG');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+
 
 ############################## whatsapp message send using TWilio ######################333
 def send_to_whatsapp(conversation_log):
@@ -269,6 +257,19 @@ def render_message(message, role):
   
 
 def main():
+    st.markdown(
+    """
+    <style>
+    body {
+        background-image: url('./workspaces/Uskt-Chatbot/chatbot-bg.JPG');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
     st.title("Chat With Uskt Chatbot")
      # Add a button to clear the conversation
     if st.button("Reset Conversation"):
