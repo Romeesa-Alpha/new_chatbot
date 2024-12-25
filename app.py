@@ -100,7 +100,7 @@ def extract_text(page):
         return ""
 
 @st.cache_data
-def split_into_chunks(text, chunk_size=1000, overlap=100):
+def split_into_chunks(text, chunk_size=500, overlap=100):
     words = text.split()
     chunks = []
     for i in range(0, len(words), chunk_size - overlap):
@@ -330,7 +330,7 @@ def main():
         # st.session_state.messages.append({"role": "assistant", "content": full_response})
         
 
-        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=2) if st.session_state.chunks else []
+        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=3) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
         prompt_limit = f"{st.session_state.messages} + {context}"
