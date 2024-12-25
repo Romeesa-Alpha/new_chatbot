@@ -342,16 +342,16 @@ def main():
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
         
         ################# Context lenght checking ##########################33
-        # context = ""
-        # render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+        context = ""
+        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
         
     
 
-    if len(st.session_state.conversation_log) >= 2:  # Example threshold
-        # Send the log to WhatsApp
-        send_to_whatsapp(st.session_state.conversation_log)
-        # Optionally clear the log after sending
-        st.session_state.conversation_log = []
+    # if len(st.session_state.conversation_log) >= 2:  # Example threshold
+    #     # Send the log to WhatsApp
+    #     send_to_whatsapp(st.session_state.conversation_log)
+    #     # Optionally clear the log after sending
+    #     st.session_state.conversation_log = []
 
 
 
