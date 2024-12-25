@@ -100,7 +100,7 @@ def extract_text(page):
         return ""
 
 @st.cache_data
-def split_into_chunks(text, chunk_size=500, overlap=100):
+def split_into_chunks(text, chunk_size=300, overlap=30):
     words = text.split()
     chunks = []
     for i in range(0, len(words), chunk_size - overlap):
@@ -205,7 +205,7 @@ def get_ai_response(messages, context, model):
         chat_completion = client.chat.completions.create(
             messages=all_messages,
             model=model,
-            max_tokens=512,
+            max_tokens=1024,
             temperature=0.7
         )
         return chat_completion.choices[0].message.content
@@ -259,10 +259,7 @@ def render_message(message, role):
 def main():
 
     st.title("Chat With Uskt Chatbot")
-     # Add a button to clear the conversation
-    if st.button("Reset Conversation"):
-        st.session_state.messages = []
-        st.rerun()
+     
 
     
     # Initialize session state variables
@@ -309,6 +306,10 @@ def main():
         render_message(message["content"], message["role"])
 
 
+    # Add a button to clear the conversation
+    if st.button("Reset Conversation"):
+        st.session_state.messages = []
+        st.rerun()
     
     # Chat input
     if prompt := st.chat_input("Ask a question about Uskt"):
@@ -336,7 +337,6 @@ def main():
         prompt_limit = f"{st.session_state.messages} + {context}"
         render_message(f"Len of chunk0 = {len(relevant_chunks[0])} \n Len of chunk1 = {len(relevant_chunks[1])} \n Len of chunk2 = {len(relevant_chunks[2])} \n {len(relevant_chunks)}---------{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
-        context = ""
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
         render_message(full_response, "assistant")
 
