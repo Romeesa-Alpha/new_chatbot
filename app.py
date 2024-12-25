@@ -335,6 +335,7 @@ def main():
         prompt_limit = f"{st.session_state.messages} + {context}"
         render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
+        context = ""
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
         render_message(full_response, "assistant")
 
