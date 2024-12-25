@@ -342,7 +342,7 @@ def main():
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
         
         ################# Context lenght checking ##########################33
-        context = ""
+        # context = ""
         render_message(f"{context}", "assistant")
         
     
