@@ -56,7 +56,7 @@ st.set_page_config(page_title="University OF Sialkot", page_icon="📄", layout=
 
 # Initialize Groq client
 try:
-    client = Groq(api_key= "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")
+    client = Groq(api_key=GROQ_API_KEY)
 except Exception as e:
     logger.error(f"Failed to initialize Groq client: {e}")
     st.error("Failed to initialize the AI model. Please check your API key.")
@@ -100,7 +100,7 @@ def extract_text(page):
         return ""
 
 @st.cache_data
-def split_into_chunks(text, chunk_size=300, overlap=30):
+def split_into_chunks(text, chunk_size=1000, overlap=150):
     words = text.split()
     chunks = []
     for i in range(0, len(words), chunk_size - overlap):
@@ -339,9 +339,6 @@ def main():
 
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
         render_message(full_response, "assistant")
-
-        prompt_limit = f"{st.session_state.messages} + {context}"
-        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
