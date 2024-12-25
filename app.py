@@ -334,7 +334,7 @@ def main():
         context = "\n\n".join(relevant_chunks)
 
         prompt_limit = f"{st.session_state.messages} + {context}"
-        render_message(f"{len(relevant_chunks)}---------{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+        render_message(f"Len of chunk0 = {len(relevant_chunks[0])} \n Len of chunk1 = {len(relevant_chunks[1])} \n Len of chunk2 = {len(relevant_chunks[2])} \n {len(relevant_chunks)}---------{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
         context = ""
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
