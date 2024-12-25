@@ -330,11 +330,11 @@ def main():
         # st.session_state.messages.append({"role": "assistant", "content": full_response})
         
 
-        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=3) if st.session_state.chunks else []
+        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=2) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
         prompt_limit = f"{st.session_state.messages} + {context}"
-        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+        render_message(f"{len(relevant_chunks)}---------{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
         context = ""
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
