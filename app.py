@@ -332,7 +332,7 @@ def main():
         relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
-        prompt_limit = f"{st.session_state.messages} {context}"
+        prompt_limit = f"{st.session_state.messages} + {context}"
         render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
 
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
@@ -343,7 +343,7 @@ def main():
         
         ################# Context lenght checking ##########################33
         context = ""
-        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+        render_message(f"{context}", "assistant")
         
     
 
