@@ -183,7 +183,7 @@ def get_vectorizer(chunks):
         st.error("Failed to create text vectorizer. Please try again.")
         return None
 
-def find_most_relevant_chunks(query, chunks, vectorizer, top_k=3):
+def find_most_relevant_chunks(query, chunks, vectorizer,top_k):
     try:
         chunk_vectors = vectorizer.transform(chunks)
         query_vector = vectorizer.transform([query])
@@ -329,7 +329,7 @@ def main():
         # st.session_state.messages.append({"role": "assistant", "content": full_response})
         render_message(prompt, "user")
 
-        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
+        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=3) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
         prompt_limit = f"{st.session_state.messages} + {context}"
@@ -344,6 +344,7 @@ def main():
         ################# Context lenght checking ##########################33
         # context = ""
         render_message(f"{context}", "assistant")
+        render_message(f"{st.session_state.messages}", "assistant")
         
     
 
