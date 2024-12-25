@@ -205,7 +205,7 @@ def get_ai_response(messages, context, model):
         chat_completion = client.chat.completions.create(
             messages=all_messages,
             model=model,
-            max_tokens=1024,
+            max_tokens=512,
             temperature=0.7
         )
         return chat_completion.choices[0].message.content
@@ -314,6 +314,7 @@ def main():
     if prompt := st.chat_input("Ask a question about Uskt"):
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.session_state.conversation_log.append({"role": "\n\n user", "content": prompt})
+        render_message(prompt, "user")
         
         # with st.chat_message("user"):
         #     st.markdown(prompt)
@@ -327,7 +328,7 @@ def main():
         #     message_placeholder.markdown(full_response)
 
         # st.session_state.messages.append({"role": "assistant", "content": full_response})
-        render_message(prompt, "user")
+        
 
         relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=3) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
@@ -338,6 +339,10 @@ def main():
         context = ""
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
         render_message(full_response, "assistant")
+
+        prompt_limit = f"{st.session_state.messages} + {context}"
+        render_message(f"{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
