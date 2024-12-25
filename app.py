@@ -278,7 +278,7 @@ def main():
     # st.sidebar.header("Upload PDF")
     # pdf_file = st.sidebar.file_uploader("Upload a PDF file", type="pdf")
 
-    pdf_file = ["./data/uskt_data.pdf", "./data/Teachers data.pdf", "./data/Fee Structure.pdf"]
+    pdf_file = ["./data/uskt_data.pdf", "./data/Teachers data.pdf"]
 
     if pdf_file:
         with st.spinner("Processing PDF..."):
