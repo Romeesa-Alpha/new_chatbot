@@ -56,7 +56,7 @@ st.set_page_config(page_title="University OF Sialkot", page_icon="📄", layout=
 
 # Initialize Groq client
 try:
-    client = Groq(api_key= GROQ_API_KEY)
+    client = Groq(api_key= "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")
 except Exception as e:
     logger.error(f"Failed to initialize Groq client: {e}")
     st.error("Failed to initialize the AI model. Please check your API key.")
@@ -70,8 +70,8 @@ except Exception as e:
 #     "mixtral-8x7b-32768"
 # ]
 
-# Model = "llama3-70b-8192"
-Model = "mixtral-8x7b-32768"
+Model = "llama3-70b-8192"
+# Model = "mixtral-8x7b-32768"
 
 @st.cache_data
 def process_pdf(file):
