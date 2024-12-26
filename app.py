@@ -68,7 +68,7 @@ page_bd_img = """
         background-size: 30px 30px;
         }
         .st-emotion-cache-128upt6 ekr3hml3{
-        background-color:rgb(236, 0, 0);
+        background-color:rgb(236, 0, 0) !important;
         
         [data-testid="stAppViewContainer"]{
         background-color:rgb(236, 0, 0);
