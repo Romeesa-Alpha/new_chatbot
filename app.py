@@ -362,7 +362,7 @@ def main():
         context = "\n\n".join(relevant_chunks)
 
         prompt_limit = f"{st.session_state.messages} + {context}"
-        render_message(f"Len of chunk0 = {len(relevant_chunks[0])} \n Len of chunk1 = {len(relevant_chunks[1])} \n Len of chunk2 = {len(relevant_chunks[2])} \n {len(relevant_chunks)}---------{len(prompt_limit)}---------{len(st.session_state.messages)}---------{len(context)}", "assistant")
+        print(f"Len of chunk0 = {len(relevant_chunks[0])} \n Len of chunk1 = {len(relevant_chunks[1])} \n Len of chunk2 =  total chunks length:{len(relevant_chunks[2])} \n  relevent chunk:{len(relevant_chunks)}---------prompt size: {len(prompt_limit)}--------session state message len: -{len(st.session_state.messages)}--------Context length: -{len(context)}", "assistant")
 
         full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
         render_message(full_response, "assistant")
@@ -371,18 +371,14 @@ def main():
         st.session_state.messages.append({"role": "assistant", "content": full_response})
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
         
-        ################# Context lenght checking ##########################33
-        # context = ""
-        render_message(f"{context}", "assistant")
-        render_message(f"{st.session_state.messages}", "assistant")
-        
+        ################# Sending whatsapp log ##########################33
     
-
-    # if len(st.session_state.conversation_log) >= 2:  # Example threshold
-    #     # Send the log to WhatsApp
-    #     send_to_whatsapp(st.session_state.conversation_log)
-    #     # Optionally clear the log after sending
-    #     st.session_state.conversation_log = []
+    if len(st.session_state.conversation_log) >= 2:  # Example threshold
+        # Send the log to WhatsApp
+        send_to_whatsapp(st.session_state.conversation_log)
+        # Optionally clear the log after sending
+        print("whatsapp message send")
+        st.session_state.conversation_log = []
 
 
 
