@@ -62,6 +62,10 @@ page_bd_img = """
         background-image: radial-gradient(#9BDDFF 1px, #F8F4FF 1px);
         background-size: 30px 30px;
         }
+        .st-emotion-cache-128upt6 ekr3hml3{
+        background-color:rgb(104, 104, 104);
+        
+        }
         </style>
 
 """
@@ -385,7 +389,7 @@ def main():
     
     if len(st.session_state.conversation_log) >= 4:  # Example threshold
         # Send the log to WhatsApp
-        # send_to_whatsapp(st.session_state.conversation_log)
+        send_to_whatsapp(st.session_state.conversation_log)
         # Optionally clear the log after sending
         print("whatsapp message send")
         st.session_state.conversation_log = []
