@@ -99,14 +99,34 @@ def extract_text(page):
         logger.warning(f"Error extracting text from page: {e}")
         return ""
 
+# @st.cache_data
+# def split_into_chunks(text, chunk_size=1000, overlap=150):
+#     words = text.split()
+#     chunks = []
+#     for i in range(0, len(words), chunk_size - overlap):
+#         chunk = ' '.join(words[i:i + chunk_size])
+#         chunks.append(chunk)
+#     return chunks
+
 @st.cache_data
-def split_into_chunks(text, chunk_size=1000, overlap=150):
-    words = text.split()
+def split_into_chunks(text, chunk_size=1000, overlap=100):
+    # Validate inputs
+    if chunk_size <= overlap:
+        raise ValueError("Chunk size must be greater than overlap.")
+
     chunks = []
-    for i in range(0, len(words), chunk_size - overlap):
-        chunk = ' '.join(words[i:i + chunk_size])
-        chunks.append(chunk)
+    start = 0
+    
+    # Generate chunks with overlap
+    while start < len(text):
+        end = start + chunk_size
+        chunk = text[start:end]
+        chunks.append(chunk.strip())  # Remove any trailing whitespace
+        start += chunk_size - overlap  # Move the start pointer with overlap
+
     return chunks
+
+
 
 # @st.cache_data
 # def get_or_create_chunks(file_path):
@@ -140,21 +160,30 @@ def get_or_create_chunks(file_paths):
         combined_text = ""  # Initialize an empty string to hold combined text
         
         for file_path in file_paths:
-            with open(file_path, 'rb') as file:  # Open each file in binary read mode
-                file_content = file.read()  # Read the file content as bytes
-                file_hash = hashlib.md5(file_content).hexdigest()
+            try:
+                with open(file_path, 'rb') as file:
+                    file_content = file.read()  # Read the file content as bytes
+                    file_hash = hashlib.md5(file_content).hexdigest()
 
-            cache_file = f"cache/{file_hash}_chunks.pkl"
-            if os.path.exists(cache_file):
-                with open(cache_file, 'rb') as f:
-                    cached_chunks = pickle.load(f)
-                    combined_text += " ".join(cached_chunks)  # Combine cached chunks
-                    continue
+                cache_file = f"cache/{file_hash}_chunks.pkl"
+                if os.path.exists(cache_file):
+                    with open(cache_file, 'rb') as f:
+                        cached_chunks = pickle.load(f)
+                        combined_text += " ".join(cached_chunks)  # Combine cached chunks
+                        continue
 
-            # If not cached, process the file and extract text
-            with open(file_path, 'rb') as file:
-                text = process_pdf(file)
-                combined_text += text  # Combine text from all files
+                # If not cached, process the file and extract text
+                with open(file_path, 'rb') as file:
+                    try:
+                        text = process_pdf(file)  # Replace with robust text extraction
+                    except Exception as e:
+                        logger.warning(f"Error processing {file_path}: {e}")
+                        continue
+
+                    combined_text += text  # Combine text from all files
+            except Exception as file_error:
+                logger.warning(f"Skipping file {file_path} due to error: {file_error}")
+                continue
 
         # Split the combined text into chunks
         chunks = split_into_chunks(combined_text)
@@ -169,9 +198,7 @@ def get_or_create_chunks(file_paths):
         return chunks
     except Exception as e:
         logger.error(f"Error in get_or_create_chunks: {e}")
-        st.error("Failed to process the PDF chunks. Please try again.")
         return []
-
 
 
 @st.cache_resource
