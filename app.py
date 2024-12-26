@@ -59,7 +59,7 @@ page_bd_img = """
 <style> 
         [data-testid="stAppViewContainer"]{
             background-color: #e5e5f7;
-            background-image: url("./chatbot-bg.JPG")
+            background-image: url("https://www.uskt.edu.pk/Assets/upload/Slider/Banner1.jpg")
             opacity: 0.8;
         }
         </style>
