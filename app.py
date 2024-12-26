@@ -26,18 +26,6 @@ Auth_Token = os.getenv("Auth_Token")
 Twilio_Number= os.getenv("Twilio_Number")
 Recipient_Number = os.getenv("Recipient_Number")
 
-page_bd_img = """
-<style> 
-        [data-testid="stAppViewContainer"]{
-            background-color: #e5e5f7;
-opacity: 0.8;
-background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #444cf7 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #444cf755 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
-        }
-        </style>
-
-"""
-
-st.markdown(page_bd_img, unsafe_allow_html=True)
 
 
 
@@ -65,7 +53,21 @@ def send_to_whatsapp(conversation_log):
 
 
 # Configure Streamlit page
-st.set_page_config(page_title="University OF Sialkot", page_icon="📄", layout="wide")
+# st.set_page_config(page_title="University OF Sialkot", page_icon="📄", layout="wide")
+
+page_bd_img = """
+<style> 
+        [data-testid="stAppViewContainer"]{
+            background-color: #e5e5f7;
+opacity: 0.8;
+background: linear-gradient(135deg, #444cf755 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #444cf7 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #444cf755 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #444cf7 25%, #e5e5f7 25%) 0px 0/ 20px 20px;
+        }
+        </style>
+
+"""
+
+st.markdown(page_bd_img, unsafe_allow_html=True)
+
 
 # Initialize Groq client
 try:
