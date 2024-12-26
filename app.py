@@ -59,7 +59,7 @@ page_bd_img = """
 <style> 
         [data-testid="stAppViewContainer"]{
         background-color: #F8F4FF;
-        background-image: radial-gradient(#F8F4FF 1px, #9BDDFF 1px);
+        background-image: radial-gradient(#9BDDFF 1px, #F8F4FF 1px);
         background-size: 30px 30px;
         }
         </style>
