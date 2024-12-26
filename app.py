@@ -286,7 +286,10 @@ def render_message(message, role):
 def main():
 
     st.title("Chat With Uskt Chatbot")
-     
+      # Add a button to clear the conversation
+    if st.button("Reset Conversation"):
+        st.session_state.messages = []
+        st.rerun() 
 
     
     # Initialize session state variables
@@ -332,11 +335,7 @@ def main():
     for message in st.session_state.messages:
         render_message(message["content"], message["role"])
 
-
-    # Add a button to clear the conversation
-    if st.button("Reset Conversation"):
-        st.session_state.messages = []
-        st.rerun()
+  
     
     # Chat input
     if prompt := st.chat_input("Ask a question about Uskt"):
