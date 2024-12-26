@@ -375,7 +375,7 @@ def main():
             full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
 
         render_message(full_response, "assistant")
-        render_message(context,  "assistant")
+        # render_message(context,  "assistant")
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
