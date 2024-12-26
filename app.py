@@ -57,13 +57,18 @@ def send_to_whatsapp(conversation_log):
 
 page_bd_img = """
 <style> 
+        [data-testid="stHeader"]{
+            background-color:rgb(38, 136, 206);
+            
+
+        }
         [data-testid="stAppViewContainer"]{
         background-color: #F8F4FF;
         background-image: radial-gradient(#9BDDFF 1px, #F8F4FF 1px);
         background-size: 30px 30px;
         }
         .st-emotion-cache-128upt6 ekr3hml3{
-        background-color:rgb(104, 104, 104);
+        background-color:rgb(236, 0, 0);
         
         }
         </style>
