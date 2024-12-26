@@ -301,6 +301,12 @@ def render_message(message, role):
     # HTML for message rendering
   
 
+
+
+################################################ main Code ###########################################################
+################################################ main Code ###########################################################
+
+
 def main():
 
     st.title("Chat With Uskt Chatbot")
@@ -329,7 +335,8 @@ def main():
 
 
     # pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
-    pdf_file = "./data/Uskt_Data.pdf"
+    # pdf_file = "./data/Uskt_Data.pdf"
+    pdf_file = "./data/General_data.pdf"
 
     if pdf_file:
         with st.spinner("Processing PDF..."):
