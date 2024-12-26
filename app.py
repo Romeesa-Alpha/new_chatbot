@@ -57,7 +57,8 @@ def send_to_whatsapp(conversation_log):
 
 page_bd_img = """
 <style> 
-        [data-testid="stAppViewContainer"],{
+        [data-testid="stAppViewContainer"]{
+        background-color: #e5e5f7;
         background-image: radial-gradient(#444cf7 1px, #9BDDFF 1px);
         background-size: 30px 30px;
         }
