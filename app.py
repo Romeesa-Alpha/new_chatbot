@@ -44,7 +44,7 @@ def send_to_whatsapp(conversation_log):
         message = client.messages.create(
             from_=Twilio_Number,  # Twilio's sandbox WhatsApp number
             to= Recipient_Number,  # Your WhatsApp number
-            body=f"Conversation Log:\n\n{log_text}"
+            body=f"Conversation Log:\n{log_text}"
         )
         print("WhatsApp message sent:", message.sid)
     except Exception as e:
@@ -361,10 +361,11 @@ def main():
         relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=3) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
-        prompt_limit = f"{st.session_state.messages} + {context}"
-        render_message(f"Len of chunk0 = {len(relevant_chunks[0])} \n Len of chunk1 = {len(relevant_chunks[1])} \n Len of chunk2 =  total chunks length:{len(relevant_chunks[2])} \n  relevent chunk:{len(relevant_chunks)}---------prompt size: {len(prompt_limit)}--------session state message len: -{len(st.session_state.messages)}--------Context length: -{len(context)}", "assistant")
-
-        full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
+        # prompt_limit = f"{st.session_state.messages} + {context}"
+        # render_message(f"Len of chunk0 = {len(relevant_chunks[0])} \n Len of chunk1 = {len(relevant_chunks[1])} \n Len of chunk2 =  total chunks length:{len(relevant_chunks[2])} \n  relevent chunk:{len(relevant_chunks)}---------prompt size: {len(prompt_limit)}--------session state message len: -{len(st.session_state.messages)}--------Context length: -{len(context)}", "assistant")
+        with st.spinner("Generating response..."):
+            full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
+        
         render_message(full_response, "assistant")
 
 
@@ -373,7 +374,7 @@ def main():
         
         ################# Sending whatsapp log ##########################33
     
-    if len(st.session_state.conversation_log) >= 2:  # Example threshold
+    if len(st.session_state.conversation_log) >= 4:  # Example threshold
         # Send the log to WhatsApp
         send_to_whatsapp(st.session_state.conversation_log)
         # Optionally clear the log after sending
