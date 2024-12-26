@@ -125,6 +125,9 @@ def extract_text(page):
 
 @st.cache_data
 def split_into_chunks(text, chunk_size=1000, overlap=100):
+
+    logger.warning(f"Text for Cunks : {len(text)}")
+
     # Validate inputs
     if chunk_size <= overlap:
         raise ValueError("Chunk size must be greater than overlap.")
@@ -139,7 +142,7 @@ def split_into_chunks(text, chunk_size=1000, overlap=100):
         chunks.append(chunk.strip())  # Remove any trailing whitespace
         start += chunk_size - overlap  # Move the start pointer with overlap
     
-    print(f"Chunks size is : {len(chunks)}")
+    logger.warning(f"Chunks size is : {len(chunks)}")
     return chunks
 
 
