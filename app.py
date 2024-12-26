@@ -59,7 +59,8 @@ page_bd_img = """
 <style> 
         [data-testid="stAppViewContainer"]{
             background-color: #e5e5f7;
-opacity: 0.8;
+            background-image: url("chatbot-bg.JPG")
+            opacity: 0.8;
         }
         </style>
 
