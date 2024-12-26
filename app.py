@@ -184,6 +184,7 @@ def get_or_create_chunks(file_paths):
             except Exception as file_error:
                 logger.warning(f"Skipping file {file_path} due to error: {file_error}")
                 continue
+            print(f"{file_path} processed compelete")
 
         # Split the combined text into chunks
         chunks = split_into_chunks(combined_text)
@@ -308,7 +309,9 @@ def main():
     # st.sidebar.header("Upload PDF")
     # pdf_file = st.sidebar.file_uploader("Upload a PDF file", type="pdf")
 
-    pdf_file = ["./data/uskt_data.pdf", "./data/Teachers data.pdf"]
+
+
+    pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
 
     if pdf_file:
         with st.spinner("Processing PDF..."):
