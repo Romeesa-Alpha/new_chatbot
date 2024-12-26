@@ -138,7 +138,8 @@ def split_into_chunks(text, chunk_size=1000, overlap=100):
         chunk = text[start:end]
         chunks.append(chunk.strip())  # Remove any trailing whitespace
         start += chunk_size - overlap  # Move the start pointer with overlap
-
+    
+    print("Chunks size is : "+ len(chunks))
     return chunks
 
 
@@ -328,7 +329,7 @@ def main():
 
 
     # pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
-    pdf_file = "./data/Fee Structure.pdf"
+    pdf_file = "./data/Uskt_Data.pdf"
 
     if pdf_file:
         with st.spinner("Processing PDF..."):
@@ -343,15 +344,8 @@ def main():
             st.error("Failed to process PDF. Please try again.")
             
 
-    # selected_model = st.selectbox("Select Model", MODELS, index=MODELS.index(st.session_state.model))
-    # if selected_model != st.session_state.model:
-    #     st.session_state.model = selected_model
-
-    # Display chat history (This code is orignal for chatbot)
-    # for message in st.session_state.messages:
-    #     with st.chat_message(message["role"]):
-    #         st.markdown(message["content"])
     
+
     for message in st.session_state.messages:
         render_message(message["content"], message["role"])
 
@@ -363,20 +357,6 @@ def main():
         st.session_state.conversation_log.append({"role": "\n\n user", "content": prompt})
         render_message(prompt, "user")
         
-        # with st.chat_message("user"):
-        #     st.markdown(prompt)
-
-        # with st.chat_message("assistant"):
-        #     message_placeholder = st.empty()
-        #     relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer) if st.session_state.chunks else []
-        #     context = "\n\n".join(relevant_chunks)
-
-        #     full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
-        #     message_placeholder.markdown(full_response)
-
-        # st.session_state.messages.append({"role": "assistant", "content": full_response})
-        
-
         relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=3) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
