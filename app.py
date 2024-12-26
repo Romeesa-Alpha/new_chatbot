@@ -184,7 +184,9 @@ def get_or_create_chunks(file_paths):
             except Exception as file_error:
                 logger.warning(f"Skipping file {file_path} due to error: {file_error}")
                 continue
-            print(f"{file_path} processed compelete")
+
+        logger.error(f"Error generating AI response: {len(combined_text)}, {combined_hash}")
+        
 
         # Split the combined text into chunks
         chunks = split_into_chunks(combined_text)
