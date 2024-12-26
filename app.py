@@ -139,7 +139,7 @@ def split_into_chunks(text, chunk_size=1000, overlap=100):
         chunks.append(chunk.strip())  # Remove any trailing whitespace
         start += chunk_size - overlap  # Move the start pointer with overlap
     
-    print("Chunks size is : "+ len(chunks))
+    print(f"Chunks size is : {len(chunks)}")
     return chunks
 
 
@@ -335,8 +335,7 @@ def main():
 
 
     # pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
-    # pdf_file = "./data/Uskt_Data.pdf"
-    pdf_file = "./data/General_data.pdf"
+    pdf_file = "./data/Uskt_Data.pdf"
 
     if pdf_file:
         with st.spinner("Processing PDF..."):
