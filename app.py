@@ -185,7 +185,6 @@ def get_or_create_chunks(file_paths):
                 logger.warning(f"Skipping file {file_path} due to error: {file_error}")
                 continue
 
-        logger.error(f"Error generating AI response: {len(combined_text)}, {combined_hash}")
         
 
         # Split the combined text into chunks
