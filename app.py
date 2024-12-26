@@ -369,9 +369,9 @@ def main():
         # render_message(f"Len of chunk0 = {len(relevant_chunks[0])} \n Len of chunk1 = {len(relevant_chunks[1])} \n Len of chunk2 =  total chunks length:{len(relevant_chunks[2])} \n  relevent chunk:{len(relevant_chunks)}---------prompt size: {len(prompt_limit)}--------session state message len: -{len(st.session_state.messages)}--------Context length: -{len(context)}", "assistant")
         with st.spinner("Generating response..."):
             full_response = get_ai_response(st.session_state.messages, context, st.session_state.model)
-        
-        render_message(full_response, "assistant")
 
+        render_message(full_response, "assistant")
+        render_message(context)
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
         st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
