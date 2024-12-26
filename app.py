@@ -58,7 +58,8 @@ def send_to_whatsapp(conversation_log):
 page_bd_img = """
 <style> 
         [data-testid="stAppViewContainer"]{
-            background-image: url("https://unsplash.com/photos/a-view-of-a-city-with-tall-buildings-Y7mCzoMVHZ4")
+            background-image: url("https://unsplash.com/photos/a-view-of-a-city-with-tall-buildings-Y7mCzoMVHZ4");
+            background-size: cover;
             opacity: 0.8;
         }
         </style>
