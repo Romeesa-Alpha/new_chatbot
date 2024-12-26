@@ -26,6 +26,17 @@ Auth_Token = os.getenv("Auth_Token")
 Twilio_Number= os.getenv("Twilio_Number")
 Recipient_Number = os.getenv("Recipient_Number")
 
+page_bd_img = """
+<style> 
+        [data-testid="stAppViewContainer"]{
+            backgroud-color: black;
+        }
+        </style>
+
+"""
+
+st.markdown(page_bd_img, unsafe_allow_html=True)
+
 
 
 
@@ -128,71 +139,22 @@ def split_into_chunks(text, chunk_size=1000, overlap=100):
 
 
 
-# @st.cache_data
-# def get_or_create_chunks(file_path):
-#     try:
-#         with open(file_path, 'rb') as file:  # Open in binary read mode
-#             file_content = file.read()  # Read the file content as bytes
-#             file_hash = hashlib.md5(file_content).hexdigest()
-
-#         cache_file = f"cache/{file_hash}_chunks.pkl"
-#         if os.path.exists(cache_file):
-#             with open(cache_file, 'rb') as f:
-#                 return pickle.load(f)
-
-#         with open(file_path, 'rb') as file:
-#             text = process_pdf(file)  
-#         chunks = split_into_chunks(text)
-
-#         os.makedirs('cache', exist_ok=True)
-#         with open(cache_file, 'wb') as f:
-#             pickle.dump(chunks, f)
-
-#         return chunks
-#     except Exception as e:
-#         logger.error(f"Error in get_or_create_chunks: {e}")
-#         print("Failed to process the PDF chunks. Please try again.")
-#         return []
-
 @st.cache_data
-def get_or_create_chunks(file_paths):
+def get_or_create_chunks(file_path):
     try:
-        combined_text = ""  # Initialize an empty string to hold combined text
-        
-        for file_path in file_paths:
-            try:
-                with open(file_path, 'rb') as file:
-                    file_content = file.read()  # Read the file content as bytes
-                    file_hash = hashlib.md5(file_content).hexdigest()
+        with open(file_path, 'rb') as file:  # Open in binary read mode
+            file_content = file.read()  # Read the file content as bytes
+            file_hash = hashlib.md5(file_content).hexdigest()
 
-                cache_file = f"cache/{file_hash}_chunks.pkl"
-                if os.path.exists(cache_file):
-                    with open(cache_file, 'rb') as f:
-                        cached_chunks = pickle.load(f)
-                        combined_text += " ".join(cached_chunks)  # Combine cached chunks
-                        continue
+        cache_file = f"cache/{file_hash}_chunks.pkl"
+        if os.path.exists(cache_file):
+            with open(cache_file, 'rb') as f:
+                return pickle.load(f)
 
-                # If not cached, process the file and extract text
-                with open(file_path, 'rb') as file:
-                    try:
-                        text = process_pdf(file)  # Replace with robust text extraction
-                    except Exception as e:
-                        logger.warning(f"Error processing {file_path}: {e}")
-                        continue
+        with open(file_path, 'rb') as file:
+            text = process_pdf(file)  
+        chunks = split_into_chunks(text)
 
-                    combined_text += text  # Combine text from all files
-            except Exception as file_error:
-                logger.warning(f"Skipping file {file_path} due to error: {file_error}")
-                continue
-
-        
-
-        # Split the combined text into chunks
-        chunks = split_into_chunks(combined_text)
-
-        # Cache the chunks (use a single hash for the combined text)
-        combined_hash = hashlib.md5(combined_text.encode('utf-8')).hexdigest()
-        cache_file = f"cache/{combined_hash}_chunks.pkl"
         os.makedirs('cache', exist_ok=True)
         with open(cache_file, 'wb') as f:
             pickle.dump(chunks, f)
@@ -200,7 +162,56 @@ def get_or_create_chunks(file_paths):
         return chunks
     except Exception as e:
         logger.error(f"Error in get_or_create_chunks: {e}")
+        print("Failed to process the PDF chunks. Please try again.")
         return []
+
+# @st.cache_data
+# def get_or_create_chunks(file_paths):
+#     try:
+#         combined_text = ""  # Initialize an empty string to hold combined text
+        
+#         for file_path in file_paths:
+#             try:
+#                 with open(file_path, 'rb') as file:
+#                     file_content = file.read()  # Read the file content as bytes
+#                     file_hash = hashlib.md5(file_content).hexdigest()
+
+#                 cache_file = f"cache/{file_hash}_chunks.pkl"
+#                 if os.path.exists(cache_file):
+#                     with open(cache_file, 'rb') as f:
+#                         cached_chunks = pickle.load(f)
+#                         combined_text += " ".join(cached_chunks)  # Combine cached chunks
+#                         continue
+
+#                 # If not cached, process the file and extract text
+#                 with open(file_path, 'rb') as file:
+#                     try:
+#                         text = process_pdf(file)  # Replace with robust text extraction
+#                     except Exception as e:
+#                         logger.warning(f"Error processing {file_path}: {e}")
+#                         continue
+
+#                     combined_text += text  # Combine text from all files
+#             except Exception as file_error:
+#                 logger.warning(f"Skipping file {file_path} due to error: {file_error}")
+#                 continue
+
+        
+
+#         # Split the combined text into chunks
+#         chunks = split_into_chunks(combined_text)
+
+#         # Cache the chunks (use a single hash for the combined text)
+#         combined_hash = hashlib.md5(combined_text.encode('utf-8')).hexdigest()
+#         cache_file = f"cache/{combined_hash}_chunks.pkl"
+#         os.makedirs('cache', exist_ok=True)
+#         with open(cache_file, 'wb') as f:
+#             pickle.dump(chunks, f)
+
+#         return chunks
+#     except Exception as e:
+#         logger.error(f"Error in get_or_create_chunks: {e}")
+#         return []
 
 
 @st.cache_resource
@@ -312,8 +323,8 @@ def main():
 
 
 
-    pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
-    # pdf_file = "./data/Fee Structure.pdf"
+    # pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
+    pdf_file = "./data/Fee Structure.pdf"
 
     if pdf_file:
         with st.spinner("Processing PDF..."):
