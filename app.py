@@ -59,8 +59,6 @@ page_bd_img = """
 <style> 
         [data-testid="stHeader"]{
             background-color:rgb(38, 136, 206);
-            
-
         }
         [data-testid="stAppViewContainer"]{
         background-color: #F8F4FF;
@@ -73,6 +71,10 @@ page_bd_img = """
         [data-testid="stAppViewContainer"]{
         background-color:rgb(236, 0, 0);
 
+        }
+
+        [data-testid="stHeadingWithActionElements"]{
+        coloe:#1A2421;
         }
 
         }
