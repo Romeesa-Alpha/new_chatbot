@@ -73,7 +73,7 @@ page_bd_img = """
 
         }
 
-        [data-testid="stHeadingWithActionElements"]{
+        #chat-with-uskt-chatbot{
         coloe:#00FF22;
         }
 
