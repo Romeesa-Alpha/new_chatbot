@@ -60,24 +60,13 @@ page_bd_img = """
         [data-testid="stHeader"]{
             background-color:rgb(38, 136, 206);
         }
+        
         [data-testid="stAppViewContainer"]{
         background-color: #F8F4FF;
         background-image: radial-gradient(#9BDDFF 1px, #F8F4FF 1px);
         background-size: 30px 30px;
         }
-        .st-emotion-cache-128upt6 ekr3hml3{
-        background-color:rgb(236, 0, 0) !important;
-        
-        [data-testid="stAppViewContainer"]{
-        background-color:rgb(236, 0, 0);
 
-        }
-
-        #chat-with-uskt-chatbot{
-        coloe:#00FF22;
-        }
-
-        }
         </style>
 
 """
