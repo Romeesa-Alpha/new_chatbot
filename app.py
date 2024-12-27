@@ -74,7 +74,7 @@ page_bd_img = """
         }
 
         [data-testid="stHeadingWithActionElements"]{
-        coloe:#1A2421;
+        coloe:#00FF22;
         }
 
         }
