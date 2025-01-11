@@ -318,6 +318,10 @@ def render_message(message, role):
 
 def main():
 
+    msg = "Welcom to USKT chatbot! how can i help you?"
+    if len(st.session_state.messages) < 1:
+        render_message(msg, "assistant")
+
     
     # st.title("Chat With Uskt Chatbot")
       # Add a button to clear the conversation
@@ -346,9 +350,7 @@ def main():
 
 
 
-    if len(st.session_state.messages) < 1:
-        render_message("Welcom to USKT chatbot! how can i help you?", "assistant")
-
+    
 
 
     # pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
