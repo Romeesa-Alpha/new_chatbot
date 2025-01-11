@@ -260,7 +260,7 @@ def get_ai_response(messages, context, model):
             messages=all_messages,
             model=model,
             max_tokens=1024,
-            temperature=0.3
+            temperature=0.5
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
