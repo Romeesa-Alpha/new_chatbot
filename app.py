@@ -383,7 +383,7 @@ def main():
         st.session_state.conversation_log.append({"role": "\n\n user", "content": prompt})
         render_message(prompt, "user")
         
-        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=3) if st.session_state.chunks else []
+        relevant_chunks = find_most_relevant_chunks(prompt, st.session_state.chunks, st.session_state.vectorizer, top_k=6) if st.session_state.chunks else []
         context = "\n\n".join(relevant_chunks)
 
         # prompt_limit = f"{st.session_state.messages} + {context}"
