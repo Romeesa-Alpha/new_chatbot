@@ -318,8 +318,7 @@ def render_message(message, role):
 
 def main():
 
-    st.session_state.messages.append({"role": "assistant", "content": "Welcom to USKT chatbot! how can i help you?"})
-
+    
     # st.title("Chat With Uskt Chatbot")
       # Add a button to clear the conversation
 
@@ -344,6 +343,11 @@ def main():
 
     # st.sidebar.header("Upload PDF")
     # pdf_file = st.sidebar.file_uploader("Upload a PDF file", type="pdf")
+
+
+
+    if len(st.session_state.messages) < 1:
+        render_message("Welcom to USKT chatbot! how can i help you?", "assistant")
 
 
 
