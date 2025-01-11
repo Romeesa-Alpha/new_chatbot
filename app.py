@@ -253,14 +253,15 @@ def get_ai_response(messages, context, model):
         system_message = {"role": "system", "content": "You are a helpful university chatbot assistant for answering university of sialkot related questions about the given PDF content. Use the provided context to answer questions, but also consider the conversation history."}
         system_message2 = {"role": "system", "content": " This is the generate fee of programs and admisson, but it can be vary by speciic program so first take look in program detail if the details is note exsis then you can use it, Admission Fee: Rs. 15,000, Registration Fee: Rs. 15,000, Asosiative Degree Program (ADP) one semester fee is  86,515, Bs program one semester fee is 95,832, MS program one semester fee Rs 113,135, PHD program fee for one semester is Rs. 167,706 "}
         system_message3 = {"role": "system", "content": "write positive intro if someone ask about a personality that does not exist in context"}
+        
         # Combine system message, conversation history, and the new query with context
         all_messages = [system_message]+ [system_message2]+ [system_message3]+ messages[:-1] + [{"role": "user", "content": f"Context: {context}\n\nBased on this context and our previous conversation, please answer the following question: {messages[-1]['content']}"}]
 
         chat_completion = client.chat.completions.create(
             messages=all_messages,
             model=model,
-            max_tokens=1024,
-            temperature=0.5
+            max_tokens=512,
+            temperature=0.4
         )
         return chat_completion.choices[0].message.content
     except Exception as e:
@@ -394,16 +395,16 @@ def main():
         # render_message(context,  "assistant")
 
         st.session_state.messages.append({"role": "assistant", "content": full_response})
-        st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
+        # st.session_state.conversation_log.append({"role": "assistant", "content": full_response})
         
         ################# Sending whatsapp log ##########################33
     
-    if len(st.session_state.conversation_log) >= 4:  # Example threshold
-        # Send the log to WhatsApp
-        send_to_whatsapp(st.session_state.conversation_log)
-        # Optionally clear the log after sending
-        print("whatsapp message send")
-        st.session_state.conversation_log = []
+    # if len(st.session_state.conversation_log) >= 4:  # Example threshold
+    #     # Send the log to WhatsApp
+    #     send_to_whatsapp(st.session_state.conversation_log)
+    #     # Optionally clear the log after sending
+    #     print("whatsapp message send")
+    #     st.session_state.conversation_log = []
 
 
 
