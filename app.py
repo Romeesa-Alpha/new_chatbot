@@ -326,10 +326,10 @@ def main():
     # st.title("Chat With Uskt Chatbot")
       # Add a button to clear the conversation
 
-    if len(st.session_state.messages) > 1:
-        if st.button("Reset Conversation"):
-            st.session_state.messages = []
-            st.rerun() 
+    # if len(st.session_state.messages) > 1:
+    #     if st.button("Reset Conversation"):
+    #         st.session_state.messages = []
+    #         st.rerun() 
 
     
     # Initialize session state variables
