@@ -250,7 +250,7 @@ def find_most_relevant_chunks(query, chunks, vectorizer,top_k):
 
 def get_ai_response(messages, context, model):
     try:
-        system_message = {"role": "system", "content": "You are a helpful university chatbot assistant for answering university of sialkot related questions about the given PDF content. Use the provided context to answer questions, but also consider the conversation history."}
+        system_message = {"role": "system", "content": "You are a helpful university chatbot assistant for answering university of sialkot related questions about the given PDF content. Use the provided context to answer questions, but also consider the conversation history. if the asnwer is not in context then say that bot is still under construction "}
         system_message2 = {"role": "system", "content": " This is the generate fee of programs and admisson, but it can be vary by speciic program so first take look in program detail if the details is note exsis then you can use it, Admission Fee: Rs. 15,000, Registration Fee: Rs. 15,000, Asosiative Degree Program (ADP) one semester fee is  86,515, Bs program one semester fee is 95,832, MS program one semester fee Rs 113,135, PHD program fee for one semester is Rs. 167,706 "}
         system_message3 = {"role": "system", "content": "write positive intro if someone ask about a personality that does not exist in context"}
         
@@ -270,7 +270,7 @@ def get_ai_response(messages, context, model):
 
 
 def render_message(message, role):
-    # Define CSS for alignment
+    # Define CSS for alignmentasa
     if role == "assistant":
         # Left-aligned messages (bot)
         alignment = "left"
