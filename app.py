@@ -319,8 +319,8 @@ def render_message(message, role):
 def main():
 
     msg = "Welcom to USKT chatbot! how can i help you?"
-    if len(st.session_state.messages) < 1:
-        render_message(msg, "assistant")
+    # if len(st.session_state.messages) < 1:
+    render_message(msg, "assistant")
 
     
     # st.title("Chat With Uskt Chatbot")
