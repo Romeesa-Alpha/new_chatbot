@@ -21,35 +21,35 @@ logger = logging.getLogger(__name__)
 load_dotenv()
 
 GROQ_API_KEY= os.getenv("GROQ_API_KEY")
-Account_SID = os.getenv("Account_SID")
-Auth_Token = os.getenv("Auth_Token")
-Twilio_Number= os.getenv("Twilio_Number")
-Recipient_Number = os.getenv("Recipient_Number")
+# Account_SID = os.getenv("Account_SID")
+# Auth_Token = os.getenv("Auth_Token")
+# Twilio_Number= os.getenv("Twilio_Number")
+# Recipient_Number = os.getenv("Recipient_Number")
 
 
 
 
 
 ############################## whatsapp message send using TWilio ######################333
-def send_to_whatsapp(conversation_log):
-    try:
-        # Twilio account credentials
-        account_sid = Account_SID
-        auth_token = Auth_Token
-        client = Client(account_sid, auth_token)
+# def send_to_whatsapp(conversation_log):
+#     try:
+#         # Twilio account credentials
+#         account_sid = Account_SID
+#         auth_token = Auth_Token
+#         client = Client(account_sid, auth_token)
 
-        # Format the log as a readable string
-        log_text = "\n".join([f"{msg['role']}: {msg['content']}" for msg in conversation_log])
+#         # Format the log as a readable string
+#         log_text = "\n".join([f"{msg['role']}: {msg['content']}" for msg in conversation_log])
 
-        # Send to WhatsApp
-        message = client.messages.create(
-            from_=Twilio_Number,  # Twilio's sandbox WhatsApp number
-            to= Recipient_Number,  # Your WhatsApp number
-            body=f"Conversation Log:\n{log_text}"
-        )
-        print("WhatsApp message sent:", message.sid)
-    except Exception as e:
-        print("Failed to send WhatsApp message:", str(e))
+#         # Send to WhatsApp
+#         message = client.messages.create(
+#             from_=Twilio_Number,  # Twilio's sandbox WhatsApp number
+#             to= Recipient_Number,  # Your WhatsApp number
+#             body=f"Conversation Log:\n{log_text}"
+#         )
+#         print("WhatsApp message sent:", message.sid)
+#     except Exception as e:
+#         print("Failed to send WhatsApp message:", str(e))
 
 
 # Configure Streamlit page
@@ -357,7 +357,7 @@ def main():
     # pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
     # pdf_file = ["./data/Uskt_Data.pdf", "./data/Directions_data.pdf", "./data/ReTrain_Data.pdf"]
     pdf_file = ["./new_data/data.pdf", "./new_data/moz.pdf", "./new_data/new_locations.pdf" , "./new_data/ReTrain.pdf"]
-    
+
     if pdf_file:
         with st.spinner("Processing PDF..."):
             st.session_state.chunks = get_or_create_chunks(pdf_file)
