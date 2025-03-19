@@ -255,7 +255,7 @@ def get_ai_response(messages, context, model):
         system_message3 = {"role": "system", "content": "write positive intro if someone ask about a personality that does not exist in context"}
         
         # Combine system message, conversation history, and the new query with context
-        all_messages = [system_message]+ [system_message2]+ [system_message3]+ messages[:-1] + [{"role": "user", "content": f"Context: {context}\n\nBased on this context and our previous conversation, please answer the following question: {messages[-1]['content']}"}]
+        all_messages = [system_message]+ [system_message2]+ [system_message3]+ messages[:-1] + [{"role": "user", "content": f"Context: {context}\n\n ON this data and our previous conversation, please answer the following question and plesae dont say in the start acording to provide context,  message: {messages[-1]['content']}"}]
 
         chat_completion = client.chat.completions.create(
             messages=all_messages,
@@ -355,8 +355,9 @@ def main():
 
 
     # pdf_file = ["./data/Directions_data.pdf", "./data/Fee Structure.pdf", "./data/General_data.pdf", "./data/Post-Graduate_Programs.pdf", "./data/Teachers data.pdf", "./data/Under_Graduate_Programs.pdf", "./data/University of Sialkot chatbot.pdf"]
-    pdf_file = ["./data/Uskt_Data.pdf", "./data/Directions_data.pdf", "./data/ReTrain_Data.pdf"]
-
+    # pdf_file = ["./data/Uskt_Data.pdf", "./data/Directions_data.pdf", "./data/ReTrain_Data.pdf"]
+    pdf_file = ["./new_data/data.pdf", "./new_data/moz.pdf", "./new_data/new_locations.pdf" , "./new_data/ReTrain.pdf"]
+    
     if pdf_file:
         with st.spinner("Processing PDF..."):
             st.session_state.chunks = get_or_create_chunks(pdf_file)
